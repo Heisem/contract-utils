@@ -1,6 +1,6 @@
 {
   "name": "contract-utils",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Web3 Smart Contracts Utility Library for Raw Transactions",
   "main": "index.js",
   "scripts": {
