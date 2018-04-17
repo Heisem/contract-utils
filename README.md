@@ -1,5 +1,5 @@
 # contract-utils
-Web3 Smart Contracts Utility Library for Raw Transactions
+Contract Utility Library for Ethereum, to easily sign and send raw transactions using web3
 
 #### How to use:
 ```sh
