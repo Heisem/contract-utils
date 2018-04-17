@@ -12,13 +12,15 @@ const contracts = {
   },
 };
 const contractUtils = new ContractUtils(web3, contracts);
+
 // Example signing and sending transaction to a custom ERC20 contract
 contractUtils.sendTransaction(
   'erc20', // contract name from 'contacts' object
   'privateKey', // private key to sign the transaction
   'transfer', // method to be called in the contract
-  'toAddress', // param from 'erc20' contract
-  web3.utils.toWei(String(1), 'ether'), // param from 'erc20' contract
+  'address', // param from 'transfer' function
+  web3.utils.toWei(String(1), 'ether'), // param from 'transfer' function
   // ...other params
-).then(console.log);
+)
+.then(console.log);
 ```
