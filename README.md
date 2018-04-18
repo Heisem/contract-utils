@@ -1,6 +1,9 @@
 # contract-utils
 Contract utility library for Ethereum, to easily sign and send raw transactions
 
+#### Installation:
+  - `npm install contract-utils --save`
+
 #### How to use:
 ```sh
 const ContractUtils = require('contract-utils');
