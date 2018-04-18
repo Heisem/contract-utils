@@ -1,16 +1,19 @@
 const ethereumTx = require('ethereumjs-tx');
+const Web3 = require('web3');
 
-const Connection = require('./Connection');
+const { version } = require('../package.json');
 
 // Contract Utility Library
-class ContractUtils extends Connection {
+class ContractUtils extends Web3 {
   /**
    * Create ContractUtils
    * @param {string} providerUrl provider url
    * @param {object} contracts example: { 'erc20': { address: '', abi: [] } }
    */
   constructor(providerUrl, contracts) {
-    super(providerUrl, contracts);
+    super(providerUrl);
+    this.contracts = contracts;
+    this.version = version;
   }
 
   /**
@@ -24,7 +27,7 @@ class ContractUtils extends Connection {
     return {
       contractName,
       address,
-      contract: new this.web3.eth.Contract(abi, address),
+      contract: new this.eth.Contract(abi, address),
     };
   };
 
@@ -36,15 +39,15 @@ class ContractUtils extends Connection {
    * @returns {object} rawTx
    */
   async createRawTransaction(contract, gasLimit = 200000, value = 0, method, fromAddress, params) {
-    const nonce = await this.web3.eth.getTransactionCount(fromAddress);
-    const gasPriceGwei = await this.web3.eth.getGasPrice();
+    const nonce = await this.eth.getTransactionCount(fromAddress);
+    const gasPriceGwei = await this.eth.getGasPrice();
     return {
       from: fromAddress,
-      nonce: this.web3.utils.toHex(nonce),
+      nonce: this.utils.toHex(nonce),
       gasPrice: Number(gasPriceGwei),
-      gasLimit: this.web3.utils.toHex(gasLimit),
+      gasLimit: this.utils.toHex(gasLimit),
       to: contract.address,
-      value: this.web3.utils.toHex(value),
+      value: this.utils.toHex(value),
       data: contract.contract.methods[method](...Object.values(params)).encodeABI(),
       // chainId: chainId,
     };
@@ -74,11 +77,11 @@ class ContractUtils extends Connection {
    */
   async sendTransaction({ contractName, privateKey, gasLimit, value, method, ...params }) {
     const contract = this.createContract(contractName);
-    const account = this.web3.eth.accounts.privateKeyToAccount(`0x${privateKey}`);
+    const account = this.eth.accounts.privateKeyToAccount(`0x${privateKey}`);
     const fromAddress = account.address;
     const rawTransaction = await this.createRawTransaction(contract, gasLimit, value, method, fromAddress, params);
     const signedTransaction = this.signTransaction(privateKey, rawTransaction);
-    const receipt = await this.web3.eth.sendSignedTransaction(signedTransaction);
+    const receipt = await this.eth.sendSignedTransaction(signedTransaction);
     return receipt;
   };
 
