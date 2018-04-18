@@ -1,5 +1,5 @@
 # contract-utils
-Contract utility library for Ethereum, to easily sign and send raw transactions using web3
+Contract utility library for Ethereum, to easily sign and send raw transactions
 
 #### How to use:
 ```sh
@@ -14,14 +14,16 @@ const contractUtils = new ContractUtils('http://localhost:8545', contracts);
 
 // Example signing and sending transaction to a custom ERC20 contract
 contractUtils.sendTransaction({
-  constractName: 'erc20', // contract name from 'contacts' object
+  constractName: 'erc20', // contract name from 'contracts' object
   privateKey: 'privateKey', // private key to sign the transaction
-  gasLimit: 4500000, // Optional Default: 0
-  value: 0, // Optional value sent in ether if function is 'payable' default: 0
+  gasLimit: 4500000, // Optional (default: 0)
+  value: 0, // Optional value sent in ether if function is 'payable' (default: 0)
   method: 'transfer', // method to be called in the contract
-  // @params in order as defined by the function
+  /**
+   * @params in order as defined by the function
+   */
   address: '0x...', // @param1
-  amount: web3.utils.toWei(String(1), 'ether'), // @param2
+  amount: 1000000000000000000, // @param2
   // ...other params
 })
 .then(console.log);
