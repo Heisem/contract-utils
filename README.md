@@ -16,14 +16,14 @@ const contractUtils = new ContractUtils('http://localhost:8545', contracts);
 contractUtils.sendTransaction({
   constractName: 'erc20', // contract name from 'contracts' object
   privateKey: 'privateKey', // private key to sign the transaction
-  gasLimit: 4500000, // Optional (default: 0)
-  value: 0, // Optional value sent in ether if function is 'payable' (default: 0)
+  gasLimit: 4500000, //   optional: (default: 0)
+  value: 0, // optional value sent in ether if function is 'payable' (default: 0)
   method: 'transfer', // method to be called in the contract
   /**
-   * @params in order as defined by the function
+   * @params in order as defined by the contract function
    */
-  address: '0x...', // @param1
-  amount: 1000000000000000000, // @param2
+  toAddress: '0x...', // @param1
+  tokens: 1000000000000000000, // @param2
   // ...other params
 })
 .then(console.log);
