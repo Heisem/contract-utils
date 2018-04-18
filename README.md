@@ -16,7 +16,7 @@ const contractUtils = new ContractUtils('http://localhost:8545', contracts);
 contractUtils.sendTransaction({
   constractName: 'erc20', // contract name from 'contracts' object
   privateKey: 'privateKey', // private key to sign the transaction
-  gasLimit: 4500000, //   optional: (default: 0)
+  gasLimit: 200000, //   optional: (default: 200000)
   value: 0, // optional value sent in ether if function is 'payable' (default: 0)
   method: 'transfer', // method to be called in the contract
   /**
