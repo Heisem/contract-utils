@@ -19,7 +19,7 @@ Transaction.prototype.constructor = Transaction;
  * @param {string} contractName
  * @returns {object} contract
  */
-Transaction.prototype.create = function createContract(contractName) {
+Transaction.prototype.createContract = function createContract(contractName) {
   const contract = this.contracts[contractName];
   const { abi, address } = contract;
   return {
