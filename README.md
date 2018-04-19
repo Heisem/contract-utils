@@ -17,7 +17,7 @@ const Transaction = new Transaction('http://localhost:8545', contracts);
 
 // Example signing and sending transaction to a custom ERC20 contract
 const txData = {
-  constractName: 'erc20', // contract name from 'contracts' object
+  contractName: 'erc20', // contract name from 'contracts' object
   privateKey: 'privateKey', // private key to sign the transaction
   gasLimit: 200000, //   optional: (default: 200000)
   value: 0, // optional value sent in ether if function is 'payable' (default: 0)
