@@ -1,10 +1,8 @@
 const ethereumTx = require('ethereumjs-tx');
 const Web3 = require('web3');
 
-const { version } = require('../package.json');
-
 // Contract Utility Library
-class ContractUtils extends Web3 {
+class Transaction extends Web3 {
   /**
    * Create ContractUtils
    * @param {string} providerUrl provider url
@@ -13,7 +11,6 @@ class ContractUtils extends Web3 {
   constructor(providerUrl, contracts) {
     super(providerUrl);
     this.contracts = contracts;
-    this.version = version;
   }
 
   /**
@@ -38,7 +35,7 @@ class ContractUtils extends Web3 {
    * @param {object} params params as array
    * @returns {object} rawTx
    */
-  async createRawTransaction(contract, gasLimit = 200000, value = 0, method, fromAddress, params) {
+  async create(contract, gasLimit = 200000, value = 0, method, fromAddress, params) {
     const nonce = await this.eth.getTransactionCount(fromAddress);
     const gasPriceGwei = await this.eth.getGasPrice();
     return {
@@ -59,7 +56,7 @@ class ContractUtils extends Web3 {
    * @param {object} rawTransaction
    * @returns {object} signedTransaction
    */
-  signTransaction(privateKey, rawTransaction) {
+  sign(privateKey, rawTransaction) {
     const key = new Buffer(privateKey, 'hex');
     const tx = new ethereumTx(rawTransaction);
     tx.sign(key);
@@ -75,16 +72,15 @@ class ContractUtils extends Web3 {
    * @param {object} params // params as defined in the contract function
    * @returns {object} receipt from transaction
    */
-  async sendTransaction({ contractName, privateKey, gasLimit, value, method, ...params }) {
+  async send({ contractName, privateKey, gasLimit, value }, method, ...params) {
     const contract = this.createContract(contractName);
     const account = this.eth.accounts.privateKeyToAccount(`0x${privateKey}`);
     const fromAddress = account.address;
-    const rawTransaction = await this.createRawTransaction(contract, gasLimit, value, method, fromAddress, params);
-    const signedTransaction = this.signTransaction(privateKey, rawTransaction);
+    const rawTransaction = await this.create(contract, gasLimit, value, method, fromAddress, params);
+    const signedTransaction = this.sign(privateKey, rawTransaction);
     const receipt = await this.eth.sendSignedTransaction(signedTransaction);
     return receipt;
   };
-
 }
 
-module.exports = ContractUtils;
+module.exports = Transaction;

@@ -1,8 +1,8 @@
 {
   "name": "contract-utils",
   "version": "0.1.14",
-  "description": "Web3 Smart Contracts Utility Library for Raw Transactions",
-  "main": "./src/index.js",
+  "description": "Contract utility library for Ethereum, to easily sign and send raw transactions",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
