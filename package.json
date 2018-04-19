@@ -1,6 +1,6 @@
 {
   "name": "contract-utils",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "Contract utility library for Ethereum, to easily sign and send raw transactions",
   "main": "index.js",
   "scripts": {
