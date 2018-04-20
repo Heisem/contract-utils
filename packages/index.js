@@ -1,4 +1,4 @@
-var version = require('../package.json').version;
+const { version } = require('../package.json');
 
 module.exports = {
   version,
