@@ -1,3 +1,3 @@
-const contractUtils = require('./packages');
+var contractUtils = require('./packages');
 
 module.exports = contractUtils;

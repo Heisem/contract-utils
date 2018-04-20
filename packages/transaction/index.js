@@ -1,12 +1,12 @@
-const ethereumTx = require('ethereumjs-tx');
-const Web3 = require('web3');
+var ethereumTx = require('ethereumjs-tx');
+var Web3 = require('web3');
 
 /**
  * Create ContractUtils
  * @param {string} providerUrl provider url
  * @param {object} contracts example: { 'erc20': { address: '', abi: [] } }
  */
-const Transaction = function (providerUrl, contracts) {
+var Transaction = function (providerUrl, contracts) {
   Web3.call(this, providerUrl);
   this.contracts = contracts; 
 }
@@ -20,8 +20,8 @@ Transaction.prototype.constructor = Transaction;
  * @returns {object} contract
  */
 Transaction.prototype.createContract = function createContract(contractName) {
-  const contract = this.contracts[contractName];
-  const { abi, address } = contract;
+  var contract = this.contracts[contractName];
+  var { abi, address } = contract;
   return {
     contractName,
     address,
@@ -36,19 +36,26 @@ Transaction.prototype.createContract = function createContract(contractName) {
  * @param {object} params params as array
  * @returns {object} rawTx
  */
-Transaction.prototype.create = async function createContract(contract, gasLimit = 200000, value = 0, method, fromAddress, params) {
-    const nonce = await this.eth.getTransactionCount(fromAddress);
-    const gasPriceGwei = await this.eth.getGasPrice();
-    return {
-      from: fromAddress,
-      nonce: this.utils.toHex(nonce),
-      gasPrice: Number(gasPriceGwei),
-      gasLimit: this.utils.toHex(gasLimit),
-      to: contract.address,
-      value: this.utils.toHex(value),
-      data: contract.contract.methods[method](...Object.values(params)).encodeABI(),
-      // chainId: chainId,
-    };
+Transaction.prototype.create = function createContract(contract, gasLimit, value, method, fromAddress, params) {
+    var nonce = 0;
+    var gasLimit = gasLimit || 200000;
+    var value = value || 0;
+    var _this = this;
+    return this.eth.getTransactionCount(fromAddress).then(function(nonceCount) {
+      nonce = nonceCount;
+      return _this.eth.getGasPrice();
+    }).then(function(gasPriceGwei) {
+      return {
+        from: fromAddress,
+        nonce: _this.utils.toHex(nonce),
+        gasPrice: Number(gasPriceGwei),
+        gasLimit: _this.utils.toHex(gasLimit),
+        to: contract.address,
+        value: _this.utils.toHex(value),
+        data: contract.contract.methods[method].apply(_this, params).encodeABI(),
+        // chainId: chainId,
+      };
+    });
   };
 
 /**
@@ -58,11 +65,11 @@ Transaction.prototype.create = async function createContract(contract, gasLimit 
  * @returns {object} signedTransaction
  */
 Transaction.prototype.sign = function signTransaction(privateKey, rawTransaction) {
-  const key = new Buffer(privateKey, 'hex');
-  const tx = new ethereumTx(rawTransaction);
+  var key = new Buffer(privateKey, 'hex');
+  var tx = new ethereumTx(rawTransaction);
   tx.sign(key);
-  const serializedTx = tx.serialize();
-  return `0x${serializedTx.toString('hex')}`;
+  var serializedTx = tx.serialize();
+  return '0x' + serializedTx.toString('hex');
 }
 
 /**
@@ -73,14 +80,22 @@ Transaction.prototype.sign = function signTransaction(privateKey, rawTransaction
  * @param {object} params // params as defined in the contract function
  * @returns {object} receipt from transaction
  */
-Transaction.prototype.send = async function sendTransaction({ contractName, privateKey, gasLimit, value }, method, ...params) {
-  const contract = this.createContract(contractName);
-  const account = this.eth.accounts.privateKeyToAccount(`0x${privateKey}`);
-  const fromAddress = account.address;
-  const rawTransaction = await this.create(contract, gasLimit, value, method, fromAddress, params);
-  const signedTransaction = this.sign(privateKey, rawTransaction);
-  const receipt = await this.eth.sendSignedTransaction(signedTransaction);
-  return receipt;
+Transaction.prototype.send = function sendTransaction({ contractName, privateKey, gasLimit, value }, method) {
+  var params = Array.prototype.slice.call(arguments);
+  params = params.slice(2);
+  var contract = this.createContract(contractName);
+  var account = this.eth.accounts.privateKeyToAccount('0x' + privateKey);
+  var fromAddress = account.address;
+  var signedTransaction;
+  var _this = this;
+  return this.create(contract, gasLimit, value, method, fromAddress, params)
+    .then(function(rawTransaction) {
+      var signedTransaction = _this.sign(privateKey, rawTransaction);
+      return _this.eth.sendSignedTransaction(signedTransaction);
+    })
+    .then(function(receipt) {
+      return receipt;
+    });
 };
 
 module.exports = Transaction;
