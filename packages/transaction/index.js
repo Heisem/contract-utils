@@ -7,6 +7,7 @@ var Web3 = require('web3');
  * @param {object} contracts example: { 'erc20': { address: '', abi: [] } }
  */
 var Transaction = function (providerUrl, contracts) {
+  if (!new.target) throw 'Transaction() must be called with new';
   Web3.call(this, providerUrl);
   this.contracts = contracts; 
 }
@@ -36,7 +37,7 @@ Transaction.prototype.createContract = function createContract(contractName) {
  * @param {object} params params as array
  * @returns {object} rawTx
  */
-Transaction.prototype.create = function createContract(contract, gasLimit, value, method, fromAddress, params) {
+Transaction.prototype.create = function createTransaction(contract, gasLimit, value, method, fromAddress, params) {
     var nonce = 0;
     var gasLimit = gasLimit || 200000;
     var value = value || 0;
