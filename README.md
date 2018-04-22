@@ -1,5 +1,6 @@
 # contract-utils
 Contract utility library for Ethereum, to easily sign and send raw transactions
+
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
 #### Installation:
