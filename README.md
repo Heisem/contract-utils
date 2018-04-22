@@ -1,7 +1,7 @@
 # contract-utils
 Contract utility library for Ethereum, to easily sign and send raw transactions
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
+[![npm version](https://badge.fury.io/js/contract-utils.svg)](https://badge.fury.io/js/contract-utils) [![Build Status](https://travis-ci.org/Heisem/contract-utils.svg?branch=master)](https://travis-ci.org/Heisem/contract-utils)
 
 #### Installation:
   - `npm install contract-utils --save`
