@@ -1,7 +1,7 @@
 # contract-utils
 Contract utility library for Ethereum, to easily sign and send raw transactions
 
-[![npm version](https://badge.fury.io/js/contract-utils.svg)](https://badge.fury.io/js/contract-utils) [![Build Status](https://travis-ci.org/Heisem/contract-utils.svg?branch=master)](https://travis-ci.org/Heisem/contract-utils) [![dependencies Status](https://david-dm.org/heisem/contract-utils/status.svg)](https://david-dm.org/heisem/contract-utils) [![devDependencies Status](https://david-dm.org/heisem/contract-utils/dev-status.svg)](https://david-dm.org/heisem/contract-utils?type=dev) [![Coverage Status](https://coveralls.io/repos/github/Heisem/contract-utils/badge.svg?branch=master)](https://coveralls.io/github/Heisem/contract-utils?branch=master)
+[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![dependencies Status][dep-image]][dep-url] [![devDependencies Status][dep-dev-image]][dep-dev-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 #### Installation:
   - `npm install contract-utils --save`
@@ -33,3 +33,14 @@ Transaction.send(
 )
 .then(console.log);
 ```
+
+[npm-image]: https://badge.fury.io/js/contract-utils.svg
+[npm-url]: https://badge.fury.io/js/contract-utils
+[travis-image]: https://travis-ci.org/Heisem/contract-utils.svg?branch=master
+[travis-url]: https://travis-ci.org/Heisem/contract-utils
+[dep-image]: https://david-dm.org/heisem/contract-utils/status.svg
+[dep-url]: https://david-dm.org/heisem/contract-utils
+[dep-dev-image]: https://david-dm.org/heisem/contract-utils/dev-status.svg
+[dep-dev-url]: https://david-dm.org/heisem/contract-utils?type=dev
+[coveralls-image]: https://coveralls.io/repos/github/Heisem/contract-utils/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/Heisem/contract-utils?branch=master
