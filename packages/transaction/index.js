@@ -75,13 +75,16 @@ Transaction.prototype.sign = function signTransaction(privateKey, rawTransaction
 
 /**
  * Send Raw Transsaction
- * @param {string} contractName // contract name defined in './contract/index'
+ * @param {string} txDate // txData object { contractName, privateKey, gasLimit, value }
  * @param {string} method // contract function to be called
- * @param {string} privateKey // private key
- * @param {object} params // params as defined in the contract function
+ * @param {object} params // arguments with the rest of the params
  * @returns {object} receipt from transaction
  */
-Transaction.prototype.send = function sendTransaction({ contractName, privateKey, gasLimit, value }, method) {
+Transaction.prototype.send = function sendTransaction(txData, method) {
+  var contractName = txData.contractName;
+  var privateKey = txData.privateKey;
+  var gasLimit = txData.gasLimit;
+  var value = txData.value;
   var params = Array.prototype.slice.call(arguments);
   params = params.slice(2);
   var contract = this.createContract(contractName);
