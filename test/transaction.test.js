@@ -19,6 +19,10 @@ describe('Transaction', () => {
     expect(transaction).to.be.a('object');
   });
 
+  it('should throw when called as a function', () => {
+    expect(Transaction).to.throw();
+  });
+
   describe('Transaction.createContract()', () => {
     it('should return a custom contract object', () => {
       const mySpy = chai.spy.on(transaction.eth, 'Contract');

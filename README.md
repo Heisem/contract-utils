@@ -1,7 +1,7 @@
 # contract-utils
 Contract utility library for Ethereum, to easily sign and send raw transactions
 
-[![npm version](https://badge.fury.io/js/contract-utils.svg)](https://badge.fury.io/js/contract-utils) [![Build Status](https://travis-ci.org/Heisem/contract-utils.svg?branch=master)](https://travis-ci.org/Heisem/contract-utils) [![dependencies Status](https://david-dm.org/heisem/contract-utils/status.svg)](https://david-dm.org/heisem/contract-utils) [![devDependencies Status](https://david-dm.org/heisem/contract-utils/dev-status.svg)](https://david-dm.org/heisem/contract-utils?type=dev)
+[![npm version](https://badge.fury.io/js/contract-utils.svg)](https://badge.fury.io/js/contract-utils) [![Build Status](https://travis-ci.org/Heisem/contract-utils.svg?branch=master)](https://travis-ci.org/Heisem/contract-utils) [![dependencies Status](https://david-dm.org/heisem/contract-utils/status.svg)](https://david-dm.org/heisem/contract-utils) [![devDependencies Status](https://david-dm.org/heisem/contract-utils/dev-status.svg)](https://david-dm.org/heisem/contract-utils?type=dev) [![Coverage Status](https://coveralls.io/repos/github/Heisem/contract-utils/badge.svg?branch=master)](https://coveralls.io/github/Heisem/contract-utils?branch=master)
 
 #### Installation:
   - `npm install contract-utils --save`

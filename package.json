@@ -4,7 +4,8 @@
   "description": "Contract utility library for Ethereum, to easily sign and send raw transactions",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "mocha --reporter spec",
+    "test-coveralls": "istanbul cover _mocha -- -R spec"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,8 @@
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "chai-spies": "^1.0.0",
+    "coveralls": "^3.0.0",
+    "istanbul": "^0.4.5",
     "mocha": "^5.1.1"
   }
 }
