@@ -111,9 +111,11 @@ describe('Transaction', () => {
           // ...other params
         );
         done();
-        expect(spySendSignedTransaction).to.have.been.called.once;
         expect(spyCreateContract).to.have.been.called.with('erc20');
+        expect(spyCreateContract).to.have.been.called.once;
         expect(spyPrivateKeyToAccount).to.have.been.called.with('0xe6181caaffff94a09d7e332fc8da9884d99902c7874eb74354bdcadf411929f1');
+        expect(spyPrivateKeyToAccount).to.have.been.called.once;
+        expect(spySendSignedTransaction).to.have.been.called.once;
         expect(receipt).to.be.a('object');
       })();
     });
