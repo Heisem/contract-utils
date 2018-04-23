@@ -23,7 +23,7 @@ const txData = {
   privateKey: 'privateKey', // private key to sign the transaction
   gasLimit: 200000, //   optional: (default: 200000)
   value: 0, // optional value sent in ether (wei) if function is 'payable' (default: 0)
-}
+};
 Transaction.send(
   txData,
   'transfer', // method to be called in the contract
