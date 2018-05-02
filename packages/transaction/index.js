@@ -10,7 +10,7 @@ var Transaction = function (providerUrl, contracts) {
   if (!new.target) throw 'Transaction() must be called with new';
   Web3.call(this, providerUrl);
   this.contracts = contracts; 
-}
+};
 
 Transaction.prototype = Object.create(Web3.prototype);
 Transaction.prototype.constructor = Transaction;
@@ -71,7 +71,7 @@ Transaction.prototype.sign = function signTransaction(privateKey, rawTransaction
   tx.sign(key);
   var serializedTx = tx.serialize();
   return '0x' + serializedTx.toString('hex');
-}
+};
 
 /**
  * Send Raw Transsaction
@@ -93,11 +93,11 @@ Transaction.prototype.send = function sendTransaction(txData, method) {
   var signedTransaction;
   var _this = this;
   return this.create(contract, gasLimit, value, method, fromAddress, params)
-    .then(function(rawTransaction) {
+    .then(function onSuccess(rawTransaction) {
       var signedTransaction = _this.sign(privateKey, rawTransaction);
       return _this.eth.sendSignedTransaction(signedTransaction);
     })
-    .then(function(receipt) {
+    .then(function onFailure(receipt) {
       return receipt;
     });
 };
